@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://duel05oa7qcqs"]
+
+[ext_resource type="Texture2D" uid="uid://u6fa0vc4pke3" path="res://arts/Player.png" id="1_a6qes"]
+[ext_resource type="Script" path="res://scenes/player.gd" id="1_d5hv2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dtoyi"]
+size = Vector2(16, 120)
+
+[node name="Player" type="RigidBody2D"]
+position = Vector2(-1, 0)
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("1_d5hv2")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_dtoyi")
+
+[node name="Player" type="Sprite2D" parent="."]
+texture = ExtResource("1_a6qes")

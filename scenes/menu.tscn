@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://bggb1xdsbytvt"]
+
+[ext_resource type="Script" path="res://Menu.gd" id="1_pv72e"]
+[ext_resource type="Texture2D" uid="uid://dicjcjikm6bij" path="res://arts/itch.io Cover.png" id="2_ukq2p"]
+
+[node name="Menu" type="Node2D"]
+position = Vector2(69, 27)
+script = ExtResource("1_pv72e")
+
+[node name="Itch_ioCover" type="Sprite2D" parent="."]
+position = Vector2(570, 335)
+scale = Vector2(2.05714, 1.472)
+texture = ExtResource("2_ukq2p")
+
+[node name="Play" type="Button" parent="."]
+offset_left = 453.0
+offset_top = 239.0
+offset_right = 687.0
+offset_bottom = 306.0
+theme_override_font_sizes/font_size = 30
+text = "Play"
+
+[node name="Quit" type="Button" parent="."]
+offset_left = 453.0
+offset_top = 338.0
+offset_right = 686.0
+offset_bottom = 404.0
+theme_override_font_sizes/font_size = 30
+text = "Quit"
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

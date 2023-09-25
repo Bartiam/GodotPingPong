@@ -1,0 +1,84 @@
+[gd_scene load_steps=10 format=3 uid="uid://cq2lw0txdmqfv"]
+
+[ext_resource type="Script" path="res://scenes/level.gd" id="1_fij5m"]
+[ext_resource type="Texture2D" uid="uid://dq6v3c1wkujea" path="res://arts/Board.png" id="1_gnnoq"]
+[ext_resource type="PackedScene" uid="uid://cqpspxayikv5i" path="res://scenes/ball.tscn" id="3_v0h52"]
+[ext_resource type="Texture2D" uid="uid://cqeknbsj6axik" path="res://arts/WallSprite.png" id="4_kqdf6"]
+[ext_resource type="PackedScene" uid="uid://duel05oa7qcqs" path="res://scenes/player.tscn" id="5_nw3lt"]
+[ext_resource type="PackedScene" uid="uid://dxmytsyns1sg7" path="res://scenes/Computer.tscn" id="6_6008m"]
+[ext_resource type="PackedScene" uid="uid://lfooh43icjd5" path="res://scenes/edge.tscn" id="7_rhdn5"]
+[ext_resource type="PackedScene" uid="uid://cpv36fhxint8b" path="res://scenes/ui.tscn" id="8_ykjxa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k0hve"]
+size = Vector2(1300, 5)
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_fij5m")
+
+[node name="Board" type="Sprite2D" parent="."]
+position = Vector2(641, 361)
+scale = Vector2(1.62095, 1.62198)
+texture = ExtResource("1_gnnoq")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Label" type="Label" parent="."]
+offset_left = 633.0
+offset_top = -8.0
+offset_right = 649.0
+offset_bottom = 34.0
+theme_override_font_sizes/font_size = 30
+
+[node name="Ball" parent="." instance=ExtResource("3_v0h52")]
+position = Vector2(640, 359)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(640, 360)
+
+[node name="Walls" type="Node" parent="."]
+
+[node name="UpWall" type="StaticBody2D" parent="Walls"]
+position = Vector2(643, -2)
+rotation = 1.5708
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/UpWall"]
+position = Vector2(-0.000114441, 0.000670433)
+scale = Vector2(1.66603, 2.63154)
+texture = ExtResource("4_kqdf6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/UpWall"]
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_k0hve")
+
+[node name="BottomWall" type="StaticBody2D" parent="Walls"]
+position = Vector2(640, 722)
+rotation = 1.5708
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/BottomWall"]
+position = Vector2(-0.000114441, 0.000670433)
+scale = Vector2(1.66603, 2.63154)
+texture = ExtResource("4_kqdf6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/BottomWall"]
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_k0hve")
+
+[node name="Player" parent="." instance=ExtResource("5_nw3lt")]
+position = Vector2(40, 360)
+
+[node name="Computer" parent="." instance=ExtResource("6_6008m")]
+position = Vector2(1240, 360)
+
+[node name="LeftEdge" parent="." instance=ExtResource("7_rhdn5")]
+position = Vector2(-1, 1)
+
+[node name="RightEdge" parent="." instance=ExtResource("7_rhdn5")]
+position = Vector2(1292, -4.76837e-07)
+
+[node name="UI" parent="." instance=ExtResource("8_ykjxa")]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="point_scored" from="LeftEdge" to="." method="_on_enemy_score"]
+[connection signal="point_scored" from="RightEdge" to="." method="_on_player_score"]

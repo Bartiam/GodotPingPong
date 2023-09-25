@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://lfooh43icjd5"]
+
+[ext_resource type="Script" path="res://scenes/edge.gd" id="1_r5irc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_piyqn"]
+
+[node name="Edge" type="Area2D"]
+scale = Vector2(1.4, 70)
+script = ExtResource("1_r5irc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4.28571, 5.45714)
+shape = SubResource("RectangleShape2D_piyqn")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
